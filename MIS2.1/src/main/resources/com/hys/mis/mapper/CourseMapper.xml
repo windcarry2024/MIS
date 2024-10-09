@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hys.mis.mapper.CourseMapper">
+    <select id="getDailyCourses" resultType="com.hys.mis.pojo.DaySchedule">
+        select
+        c.date,
+        c.`session1_2`,p.`position1_2`,t.`teacher1_2`,
+        c.`session3_4`,p.`position3_4`,t.`teacher3_4`,
+        c.`session5_6`,p.`position5_6`,t.`teacher5_6`,
+        c.`session7_8`,p.`position7_8`,t.`teacher7_8`,
+        c.`session9_10`,p.`position9_10`,t.`teacher9_10`,
+        c.`session11_12`,p.`position11_12`,t.`teacher11_12`
+        from
+        courses c
+        join position p on p.positionid = c.positionid
+        join teacher t on c.lessonteacherid = t.teacherid
+        <where>
+            date = #{date}
+        </where>
+    </select>
+
+    <select id="getManyDaysCourses" resultType="com.hys.mis.pojo.DaySchedule">
+        select
+        c.date,
+        c.`session1_2`,p.`position1_2`,t.`teacher1_2`,
+        c.`session3_4`,p.`position3_4`,t.`teacher3_4`,
+        c.`session5_6`,p.`position5_6`,t.`teacher5_6`,
+        c.`session7_8`,p.`position7_8`,t.`teacher7_8`,
+        c.`session9_10`,p.`position9_10`,t.`teacher9_10`,
+        c.`session11_12`,p.`position11_12`,t.`teacher11_12`
+        from
+        courses c
+        join position p on p.positionid = c.positionid
+        join teacher t on c.lessonteacherid = t.teacherid
+        <where>
+            date between #{beginDate} and #{endDate}
+        </where>
+    </select>
+</mapper>
